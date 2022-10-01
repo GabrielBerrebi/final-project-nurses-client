@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import './App.css';
 
 const App = () => {
-  return <Button>Chalom Rav</Button>;
+  return <Button size='large'>Welcome to you, Chalom Rav</Button>;
 }
 
 export default App;
