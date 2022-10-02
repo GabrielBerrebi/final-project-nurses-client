@@ -1,9 +1,8 @@
 import React from 'react';
-import { Button } from 'antd';
-import './App.css';
+import {Button} from 'antd';
 
 const App = () => {
-  return <Button size='large'>Welcome to you, Chalom Rav</Button>;
+  return <Button type='primary' size='large'>Welcome to you, Chalom Rav</Button>;
 }
 
 export default App;
