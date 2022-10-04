@@ -1,0 +1,13 @@
+.generalLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.generalLayout:not(Header) {
+  background-color: var(--secondary-color-light);
+}
+
+.children {
+  flex-grow: 1;
+}
