@@ -1,11 +1,11 @@
 import Header from '../../components/Layouts/Header/Header';
 import Footer from '../../components/Layouts/Footer/Footer';
 import React from 'react';
-import styles from './GeneralLayout.module.less'
+import styles from './Layout.module.less'
 
-const GeneralLayout = ({children}: React.PropsWithChildren<{}>) => {
+const Layout = ({children}: React.PropsWithChildren<{}>) => {
     return (
-        <div className={styles.generalLayout}>
+        <div className={styles.layout}>
             <Header/>
             <div className={styles.children}>{children}</div>
             <Footer/>
@@ -13,4 +13,4 @@ const GeneralLayout = ({children}: React.PropsWithChildren<{}>) => {
     );
 }
 
-export default GeneralLayout;
+export default Layout;
