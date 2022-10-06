@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import 'antd/dist/antd.min.css'
-
-import App from './App';
+import './colors.css';
+import 'antd/dist/antd.less'
+import AppRouter from './components/AppRouter/AppRouter';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <App/>
+        <AppRouter/>
     </React.StrictMode>
 );
 

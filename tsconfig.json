@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "./external.d.ts",
+    "./external-svg.d.ts"
   ]
 }
