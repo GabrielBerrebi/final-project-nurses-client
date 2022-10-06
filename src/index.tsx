@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import './colors.css';
+import './styles.css';
 import 'antd/dist/antd.less'
 import AppRouter from './components/AppRouter/AppRouter';
 

@@ -1,0 +1,12 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout:not(Header) {
+  background-color: var(--secondary-color-light);
+}
+
+.children {
+  height: calc(100vh - 126px) !important; // Header=80px, Footer=46px
+}
