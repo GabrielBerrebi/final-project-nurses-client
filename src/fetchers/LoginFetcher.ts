@@ -6,10 +6,13 @@ export class LoginFetcher {
     private readonly _baseURL: string = 'https://backend-app-nurse.herokuapp.com/api/auth/';
     private readonly _loginURL: string = 'login/';
     private readonly _logoutURL: string = 'logout/';
+    private readonly _axios = axios.create({
+        baseURL: this._baseURL,
+    })
 
     async login(user: User) {
         try {
-            const response = await axios.post(`${this._baseURL}${this._loginURL}`, {...user});
+            const response = await this._axios.post(this._loginURL, {...user});
             return {
                 status: response.status,
                 data: response?.data as UserFromLogin
@@ -20,6 +23,6 @@ export class LoginFetcher {
     }
 
     async logout() {
-        await axios.get(`${this._baseURL}${this._logoutURL}`);
+        await this._axios.get(this._logoutURL);
     }
 }
