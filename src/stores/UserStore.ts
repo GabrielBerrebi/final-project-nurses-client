@@ -5,8 +5,7 @@ import {UserFromLogin} from '../models/interfaces/UserFromLogin';
 export class UserStore {
     private _id: string = '';
     private _isAuthenticated: boolean = false;
-    private _role: Role = Role.STUDENT;
-
+    private _role: Role = Role.EMPTY;
     constructor() {
         makeAutoObservable(this);
     }
@@ -14,7 +13,7 @@ export class UserStore {
     setUser(user: UserFromLogin) {
         this._setId(user.id.toString());
         this._setRole(user.role);
-        this._isAuthenticated = true;
+        this._setIsAuthenticated(true);
     }
 
     getIsAuthenticated() {
@@ -22,11 +21,12 @@ export class UserStore {
     }
 
     getRole() {
-        return this._role;
+       return this._role;
     }
 
     removeUser() {
-        this._isAuthenticated = false;
+        this._role = Role.EMPTY;
+        this._setIsAuthenticated(false);
     }
 
     private _setId(id: string) {
@@ -35,5 +35,9 @@ export class UserStore {
 
     private _setRole(role: Role) {
         this._role = role;
+    }
+
+    private _setIsAuthenticated(isAuthenticated: boolean) {
+        this._isAuthenticated = isAuthenticated;
     }
 }

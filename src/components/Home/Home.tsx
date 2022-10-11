@@ -1,4 +1,4 @@
-import Layout from '../../layouts/Layout/Layout';
+import Layout from '../../wrappers/Layout/Layout';
 import {Carousel} from 'antd';
 import {ReactComponent as PatientNurseDoctorIcon} from '../../assets/characters/patient-nurse-doctor.svg';
 import {ReactComponent as NurseDoctorMedicinesIcon} from '../../assets/characters/nurse-doctor-medicines.svg';
