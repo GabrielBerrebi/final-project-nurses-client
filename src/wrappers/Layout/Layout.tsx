@@ -1,5 +1,5 @@
-import Header from '../../components/Layouts/Header/Header';
-import Footer from '../../components/Layouts/Footer/Footer';
+import Header from '../../components/PageElements/Header/Header';
+import Footer from '../../components/PageElements/Footer/Footer';
 import React from 'react';
 import styles from './Layout.module.less'
 
