@@ -9,13 +9,13 @@ import {Role} from '../../models/enums/Role';
 const AppRouter = () => {
     return <Router>
         <Routes>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/student' element={
+            <Route key='/login' path='/login' element={<Login/>}/>
+            <Route key='/student' path='/student' element={
                 <ProtectedRoute role={Role.STUDENT}>
                     <Student/>
                 </ProtectedRoute>}/>
-            <Route path='/' element={<Home/>}/>
-            <Route path='*' element={<NotExistPage />} />
+            <Route key='/' path='/' element={<Home/>}/>
+            <Route key='*' path='*' element={<NotExistPage />} />
         </Routes>
     </Router>
 }
