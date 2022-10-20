@@ -6,14 +6,13 @@ export class UserStore {
     private _id: string = '';
     private _isAuthenticated: boolean = false;
     private _role: Role = Role.EMPTY;
+
     constructor() {
         makeAutoObservable(this);
     }
 
-    setUser(user: UserFromLogin) {
-        this._setId(user.id.toString());
-        this._setRole(user.role);
-        this._setIsAuthenticated(true);
+    getId() {
+        return this._id;
     }
 
     getIsAuthenticated() {
@@ -22,6 +21,12 @@ export class UserStore {
 
     getRole() {
        return this._role;
+    }
+
+    setUser(user: UserFromLogin) {
+        this._setId(user.id.toString());
+        this._setRole(user.role);
+        this._setIsAuthenticated(true);
     }
 
     removeUser() {

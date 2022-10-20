@@ -22,11 +22,11 @@ const Login = () => {
     const submitForm = async (user: User) => {
         setIsLoading(true);
         const response = await loginFetcher.login(user);
-        if (response.data) {
-            const user: UserFromLogin = response.data;
-            userStore.setUser(user);
+        try {
+            const userFromLogin: UserFromLogin = response.data;
+            userStore.setUser(userFromLogin);
             setIsAuth(true);
-        } else {
+        } catch (e) {
             setShowAlert(true);
         }
         setIsLoading(false);
