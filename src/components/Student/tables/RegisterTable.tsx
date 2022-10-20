@@ -51,8 +51,8 @@ const RegisterTable = () => {
         return (
             <Space size='middle' direction='vertical'>
                 <strong>Required Documents: </strong>
-                <p>{documents.map((document: RequiredDocument) =>
-                    <Tag color='blue'>{document.type}</Tag>)}
+                <p>{documents.map((document: RequiredDocument, index: number) =>
+                    <Tag key={index} color='blue'>{document.type}</Tag>)}
                 </p>
             </Space>
         );

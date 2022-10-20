@@ -6,12 +6,13 @@ import {userStore} from '../../stores';
 import {studentInternshipFetcher} from '../../fetchers';
 import MyInternshipsTable from './tables/MyInternshipsTable';
 import RegisterTable from './tables/RegisterTable';
+import UploadDocumentsTable from './tables/UploadDocumentsTable';
 
 const TableTabs = () => {
     return (
         <Tabs className={styles.tabsBackground} size='large' items={[
             {key: 'Internships', label: 'Internships', children: <InternshipTableTabs/>},
-            {key: 'Documents', label: 'Documents', children: ''},
+            {key: 'Documents', label: 'Documents', children: <UploadDocumentsTable/>},
             {key: 'Attendances', label: 'Attendances', children: '', disabled: true},
         ]}/>
     );

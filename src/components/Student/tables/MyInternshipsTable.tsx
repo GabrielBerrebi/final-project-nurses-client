@@ -71,7 +71,7 @@ const MyInternshipsTable = () => {
                     <strong>Description: </strong>
                     <p>{record.description}</p>
                 </Space>
-                {record.documents?.some((document: RequiredDocument) => document.type === RequiredDocumentType.GRADES_SHEET) &&
+                {record.documents?.some((document: RequiredDocument) => !document.URL) &&
                     <Alert type='warning' showIcon={true}
                            description={'You must upload all required documents. Click on Documents to update them.'}/>
                 }
