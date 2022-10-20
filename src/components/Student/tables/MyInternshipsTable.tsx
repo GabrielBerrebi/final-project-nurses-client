@@ -2,10 +2,26 @@ import type {ColumnsType} from 'antd/es/table';
 import {StudentInternship} from '../../../models/interfaces/StudentInternship';
 import {Status} from '../../../models/enums/Status';
 import {Alert, Space, Table, Tag} from 'antd';
-import {RequiredDocumentType} from '../../../models/enums/RequiredDocumentType';
 import {RequiredDocument} from '../../../models/interfaces/RequiredDocument';
+import {getStatusCode} from '../../../core/helpers/get-status-code';
+import {userStore} from '../../../stores';
+import {studentInternshipFetcher} from '../../../fetchers';
+import {useEffect, useState} from 'react';
 
 const MyInternshipsTable = () => {
+    const [data, setData] = useState<StudentInternship[] | undefined>(undefined);
+    const id: string = userStore.getId();
+
+    const getStudentInternships = async () => {
+        if (id === '') return;
+        const internships = await studentInternshipFetcher.getStudentInternship(id);
+        setData(internships.data as unknown as StudentInternship[]);
+    }
+
+    useEffect(() => {
+        getStudentInternships();
+    }, [getStudentInternships]);
+
     const columns: ColumnsType<StudentInternship> = [{
         title: 'ID',
         dataIndex: 'id',
@@ -32,37 +48,9 @@ const MyInternshipsTable = () => {
     }];
 
     const getRenderedStatus = (status: Status) => {
-        let color: string = 'blue';
-        (status === Status.PENDING) && (color = 'orange');
-        (status === Status.STARTED) && (color = 'blue');
-        (status === Status.DONE) && (color = 'green');
+        const color: string = getStatusCode(status);
         return <Tag color={color}>{status}</Tag>;
     }
-
-    // Mock Starts Here
-    const data: StudentInternship[] = [{
-        id: '1',
-        name: 'Conifère',
-        tutorName: 'Maxime',
-        hospitalName: 'Paris - 10ème',
-        status: Status.PENDING,
-        description: 'Chalom Rav Leohavé Toratéha Veyn Lamo Michol',
-        documents: [{
-            type: RequiredDocumentType.GRADES_SHEET
-        }]
-    }, {
-        id: '2',
-        name: 'Atelier de coupe - Pin',
-        tutorName: 'Julien',
-        hospitalName: 'Paris - 10ème',
-        status: Status.STARTED
-    }, {
-        id: '3',
-        name: 'Fabrication de meuble ancien',
-        tutorName: 'Paul',
-        hospitalName: 'Paris - 10ème',
-        status: Status.DONE
-    }];
 
     const getRenderedExpansion = (record: StudentInternship) => {
         return (
@@ -73,18 +61,19 @@ const MyInternshipsTable = () => {
                 </Space>
                 {record.documents?.some((document: RequiredDocument) => !document.URL) &&
                     <Alert type='warning' showIcon={true}
-                           description={'You must upload all required documents. Click on Documents to update them.'}/>
+                           description={'You must upload all required documents. ' +
+                               'Click on Documents to update them.'}/>
                 }
             </Space>
         );
     }
 
     return (
-        <Table columns={columns} dataSource={data} expandRowByClick={true}
-               expandable={{
-                   expandedRowRender: record => getRenderedExpansion(record),
-                   rowExpandable: record => !!record.description?.length,
-               }}/>
+        <Table columns={columns} dataSource={data}
+               expandRowByClick={true} expandable={{
+            expandedRowRender: record => getRenderedExpansion(record),
+            rowExpandable: record => !!record.description?.length,
+        }}/>
     );
 }
 

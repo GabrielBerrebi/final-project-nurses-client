@@ -4,6 +4,7 @@ import {RequiredDocumentType} from '../../../models/enums/RequiredDocumentType';
 import {RequiredDocument} from '../../../models/interfaces/RequiredDocument';
 import {Button, List, Upload, UploadFile, UploadProps} from 'antd';
 import {UploadOutlined} from '@ant-design/icons';
+import {formatToPascalCase} from '../../../core/helpers/format-to-pascal-case';
 
 const UploadDocumentsTable = () => {
     const columns: ColumnsType<Partial<StudentInternship>> = [{
@@ -43,15 +44,6 @@ const UploadDocumentsTable = () => {
         defaultFileList: getDefaultFileList()
     }
 
-    const getFormattedTitle = (title: RequiredDocumentType) => {
-        return title.split(' ')
-            .map((part: string) => {
-                const loweredString = part.toLocaleLowerCase();
-                return loweredString.at(0)?.toLocaleUpperCase() + loweredString.slice(1);
-            })
-            .join(' ');
-    }
-
     const getRenderedExpansion = (record: Partial<StudentInternship>) => {
         return (
             <List>
@@ -61,7 +53,7 @@ const UploadDocumentsTable = () => {
                             <Button type='primary' icon={<UploadOutlined/>}>Upload</Button>
                         </Upload>
                     ]}>
-                        <strong>{getFormattedTitle(document.type)}</strong>
+                        <strong>{formatToPascalCase(document.type)}</strong>
                     </List.Item>)}
             </List>
         );

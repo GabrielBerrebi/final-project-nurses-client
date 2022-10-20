@@ -1,15 +1,14 @@
 import Table, {ColumnsType} from 'antd/es/table';
-import {StudentInternship} from '../../../models/interfaces/StudentInternship';
-import {Status} from '../../../models/enums/Status';
 import {Button, Divider, Space, Tag} from 'antd';
 import {RequiredDocumentType} from '../../../models/enums/RequiredDocumentType';
 import {RequiredDocument} from '../../../models/interfaces/RequiredDocument';
+import {RegisterInternship} from '../../../models/interfaces/RegisterInternship';
 
 const RegisterTable = () => {
     const onRegisterClick = () => {
     }
 
-    const columns: ColumnsType<StudentInternship> = [{
+    const columns: ColumnsType<RegisterInternship> = [{
         title: 'ID',
         dataIndex: 'id',
         key: 'id',
@@ -19,13 +18,15 @@ const RegisterTable = () => {
         dataIndex: 'name',
         key: 'name',
     }, {
-        title: 'Tutor',
-        dataIndex: 'tutorName',
-        key: 'tutorName',
+        title: 'Tutors',
+        dataIndex: 'tutorsNames',
+        key: 'tutorsNames',
+        render: (tutorsNames) => tutorsNames.join(' · ')
     }, {
-        title: 'Hospital',
-        dataIndex: 'hospitalName',
-        key: 'hospitalName',
+        title: 'Hospitals',
+        dataIndex: 'hospitalsNames',
+        key: 'hospitalsNames',
+        render: (hospitalsNames) => hospitalsNames.join(' · ')
     }, {
         title: 'Action',
         dataIndex: '',
@@ -33,19 +34,27 @@ const RegisterTable = () => {
         render: () => <Button onClick={onRegisterClick} type='primary'>Register</Button>
     },];
 
-    const data: StudentInternship[] = [{
+    const data: RegisterInternship[] = [{
         id: '4',
         name: 'Coupe de sapin - en extérieur',
-        tutorName: 'Gabriel',
-        hospitalName: 'Paris - 16ème',
-        status: Status.FREE,
-        description: 'Chalom Rav Leohavé Toratéha Veyn Lamo Michol',
+        tutorsNames: ['Gabriel'],
+        hospitalsNames: ['Paris - 16ème', 'Paris - 17ème'],
         documents: [{
             type: RequiredDocumentType.PASSPORT
         }, {
             type: RequiredDocumentType.GRADES_SHEET
-        }]
+        }],
+        description: 'Chalom Rav'
     }];
+
+    const getRenderedDescription = (description: string) => {
+        return (
+            <Space size='middle' direction='vertical'>
+                <strong>Description: </strong>
+                <span>{description}</span>
+            </Space>
+        );
+    }
 
     const getRenderedDocuments = (documents: RequiredDocument[]) => {
         return (
@@ -58,13 +67,10 @@ const RegisterTable = () => {
         );
     }
 
-    const getRenderedExpansion = (record: StudentInternship) => {
+    const getRenderedExpansion = (record: RegisterInternship) => {
         return (
             <Space size='large'>
-                <Space size='middle' direction='vertical'>
-                    <strong>Description: </strong>
-                    <span>{record.description}</span>
-                </Space>
+                {record.description && getRenderedDescription(record.description)}
                 <Divider type='vertical'/>
                 {record.documents?.length && getRenderedDocuments(record.documents)}
             </Space>
