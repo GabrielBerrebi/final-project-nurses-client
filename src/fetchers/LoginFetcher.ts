@@ -1,11 +1,11 @@
 import {User} from '../models/interfaces/User';
 import {UserFromLogin} from '../models/interfaces/UserFromLogin';
-import URLConstants from './URLConstants';
+import UrlServerConstants from './UrlServerConstants';
 
 export class LoginFetcher {
     async login(user: User) {
         try {
-            const response = await URLConstants.axiosBase.post(URLConstants.loginURL, {...user});
+            const response = await UrlServerConstants.axiosBase.post(UrlServerConstants.loginURL, {...user});
             return {
                 status: response.status,
                 data: response?.data as UserFromLogin
@@ -16,6 +16,6 @@ export class LoginFetcher {
     }
 
     async logout() {
-        await URLConstants.axiosBase.get(URLConstants.logoutURL);
+        await UrlServerConstants.axiosBase.get(UrlServerConstants.logoutURL);
     }
 }

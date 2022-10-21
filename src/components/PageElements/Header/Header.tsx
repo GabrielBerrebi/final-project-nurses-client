@@ -1,4 +1,4 @@
-import {Button, PageHeader, Tag} from 'antd';
+import {Button, PageHeader, Space, Tag} from 'antd';
 import {Link, useNavigate} from 'react-router-dom';
 import styles from './Header.module.less';
 import {userStore} from '../../../stores';
@@ -6,6 +6,7 @@ import {observer} from 'mobx-react';
 import {loginFetcher} from '../../../fetchers';
 import {Role} from '../../../models/enums/Role';
 import {useState} from 'react';
+import {UrlClientConstants as urls} from '../../../fetchers/UrlClientConstants';
 
 const Header = observer(() => {
     const [isLoading, setIsLoading] = useState(false);
@@ -21,9 +22,18 @@ const Header = observer(() => {
         navigate('/');
     }
 
+    const goToDashboard = () => {
+        (role === Role.STUDENT) && (navigate(urls.student));
+        (role === Role.TUTOR) && (navigate(urls.tutor));
+        (role === Role.SECRETARY) && (navigate(urls.secretary));
+    }
+
     const getLink = () => {
         return isAuthenticated
-            ? <Button type='primary' size='large' onClick={logout} loading={isLoading}>Log out</Button>
+            ? (<Space>
+                <Button type='text' size='large' onClick={goToDashboard}>Dashboard</Button>
+                <Button type='primary' size='large' onClick={logout} loading={isLoading}>Log out</Button>
+            </Space>)
             : [<Link to='/login' key='/login'><Button type='primary' size='large'>Sign
                 In</Button></Link>];
     }
@@ -31,7 +41,7 @@ const Header = observer(() => {
     return (
         <header className={styles.header}>
             <PageHeader title={<Link to='/'>Hospital Internship</Link>}
-                        tags={role ? <Tag color='yellow'>{role}</Tag> : <span/>}
+                        tags={role !== Role.EMPTY ? <Tag color='geekblue'>{role}</Tag> : <span/>}
                         extra={getLink()}/>
         </header>
     );

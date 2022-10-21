@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class URLConstants {
+class UrlServerConstants {
     private static readonly _baseURL: string = 'https://backend-app-nurse.herokuapp.com/api/';
 
     static readonly loginURL: string = 'auth/login/';
@@ -12,6 +12,6 @@ class URLConstants {
     })
 }
 
-export default URLConstants;
+export default UrlServerConstants;
 
 
