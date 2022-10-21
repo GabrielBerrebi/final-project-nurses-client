@@ -7,6 +7,7 @@ import {loginFetcher} from '../../../fetchers';
 import {Role} from '../../../models/enums/Role';
 import {useState} from 'react';
 import {UrlClientConstants as urls} from '../../../fetchers/UrlClientConstants';
+import {getRoleDashboard} from '../../../core/helpers/get-role-dashboard';
 
 const Header = observer(() => {
     const [isLoading, setIsLoading] = useState(false);
@@ -19,13 +20,11 @@ const Header = observer(() => {
         setIsLoading(true);
         await loginFetcher.logout();
         userStore.removeUser();
-        navigate('/');
+        navigate(urls.home);
     }
 
     const goToDashboard = () => {
-        (role === Role.STUDENT) && (navigate(urls.student));
-        (role === Role.TUTOR) && (navigate(urls.tutor));
-        (role === Role.SECRETARY) && (navigate(urls.secretary));
+        navigate(getRoleDashboard(role));
     }
 
     const getLink = () => {

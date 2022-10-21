@@ -5,10 +5,13 @@ import Student from '../Student/Student';
 import ProtectedRoute from '../../wrappers/ProtectedRoute/ProtectedRoute';
 import NotExistPage from '../NotExistPage/NotExistPage';
 import {Role} from '../../models/enums/Role';
-import {UrlClientConstants as urls}  from '../../fetchers/UrlClientConstants';
+import {UrlClientConstants as urls} from '../../fetchers/UrlClientConstants';
+import Tutor from '../Tutor/Tutor';
+import Secretary from '../Secretary/Secretary';
 
 const AppRouter = () => {
-    const [loginUrl, studentUrl] = [urls.login, urls.student];
+    const [loginUrl, studentUrl, tutorUrl, secretaryUrl] =
+        [urls.login, urls.student, urls.tutor, urls.secretary];
 
     return <Router>
         <Routes>
@@ -17,8 +20,16 @@ const AppRouter = () => {
                 <ProtectedRoute role={Role.STUDENT}>
                     <Student/>
                 </ProtectedRoute>}/>
+            <Route key={tutorUrl} path={tutorUrl} element={
+                <ProtectedRoute role={Role.TUTOR}>
+                    <Tutor/>
+                </ProtectedRoute>}/>
+            <Route key={secretaryUrl} path={secretaryUrl} element={
+                <ProtectedRoute role={Role.SECRETARY}>
+                    <Secretary/>
+                </ProtectedRoute>}/>
             <Route key='/' path='/' element={<Home/>}/>
-            <Route key='*' path='*' element={<NotExistPage />} />
+            <Route key='*' path='*' element={<NotExistPage/>}/>
         </Routes>
     </Router>
 }

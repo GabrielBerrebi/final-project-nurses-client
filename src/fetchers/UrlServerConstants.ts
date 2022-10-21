@@ -5,7 +5,7 @@ class UrlServerConstants {
 
     static readonly loginURL: string = 'auth/login/';
     static readonly logoutURL: string = 'auth/logout/';
-    static readonly studentInternships = 'student/internshipsOfStudent/';
+    static readonly studentInternships = 'student/internships/';
 
     static axiosBase = axios.create({
         baseURL: this._baseURL,
