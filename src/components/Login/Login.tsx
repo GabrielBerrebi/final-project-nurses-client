@@ -7,6 +7,7 @@ import {userStore} from '../../stores';
 import {UserFromLogin} from '../../models/interfaces/UserFromLogin';
 import {useState} from 'react';
 import {Navigate} from 'react-router-dom';
+import {getRoleDashboard} from '../../core/helpers/get-role-dashboard';
 
 const Login = () => {
     const [showAlert, setShowAlert] = useState(false);
@@ -33,7 +34,7 @@ const Login = () => {
     }
 
     if (isAuth) {
-        return <Navigate to='/student' replace/>;
+        return <Navigate to={getRoleDashboard(userStore.getRole())} replace/>;
     }
 
     return (
