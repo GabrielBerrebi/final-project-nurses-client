@@ -5,12 +5,15 @@ import Student from '../Student/Student';
 import ProtectedRoute from '../../wrappers/ProtectedRoute/ProtectedRoute';
 import NotExistPage from '../NotExistPage/NotExistPage';
 import {Role} from '../../models/enums/Role';
+import {UrlClientConstants as urls}  from '../../fetchers/UrlClientConstants';
 
 const AppRouter = () => {
+    const [loginUrl, studentUrl] = [urls.login, urls.student];
+
     return <Router>
         <Routes>
-            <Route key='/login' path='/login' element={<Login/>}/>
-            <Route key='/student' path='/student' element={
+            <Route key={loginUrl} path={loginUrl} element={<Login/>}/>
+            <Route key={studentUrl} path={studentUrl} element={
                 <ProtectedRoute role={Role.STUDENT}>
                     <Student/>
                 </ProtectedRoute>}/>

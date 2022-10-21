@@ -5,7 +5,7 @@ import {Role} from '../../models/enums/Role';
 const ProtectedRoute = (props: any) => {
     const isAuth: boolean = userStore.getIsAuthenticated();
     const role: Role = userStore.getRole();
-    const requestRole: string = Role[props.role];
+    const requestRole: string = props.role;
 
     if (!isAuth) {
         return <Navigate to='/' replace/>;
