@@ -20,7 +20,7 @@ const MyInternshipsTable = () => {
 
     useEffect(() => {
         getStudentInternships();
-    }, [getStudentInternships]);
+    }, []);
 
     const columns: ColumnsType<StudentInternship> = [{
         title: 'ID',
