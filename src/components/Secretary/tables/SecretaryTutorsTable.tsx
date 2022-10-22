@@ -4,7 +4,7 @@ import {userStore} from '../../../stores';
 import {ColumnsType} from 'antd/es/table';
 import {Button, Form, Input, List, Modal, Popconfirm, Space, Table} from 'antd';
 import {secretaryFetcher} from '../../../fetchers';
-import {SecretaryTutorInternship} from '../../../models/interfaces/secretary/SecretaryTutorInternship';
+import {SecretaryInternship} from '../../../models/interfaces/secretary/SecretaryInternship';
 import styles from './tables.module.less'
 
 const SecretaryTutorsTable = () => {
@@ -27,6 +27,7 @@ const SecretaryTutorsTable = () => {
     const onCreateTutor = async (newTutor: object) => {
         await secretaryFetcher.createTutor(newTutor);
         hideModal();
+        form.resetFields();
         getAllTutors();
     }
 
@@ -47,16 +48,16 @@ const SecretaryTutorsTable = () => {
         dataIndex: 'id',
         key: 'id',
     }, {
-        title: 'Tutor Name',
+        title: 'Name',
         dataIndex: 'name',
         key: 'name',
         sorter: (a: SecretaryTutor, b: SecretaryTutor) => a?.name.localeCompare(b?.name)
     }, {
-        title: 'Internship Name',
+        title: 'Internships',
         dataIndex: '',
         key: 'internship.name',
         render: (tutor: SecretaryTutor) => <List>
-            {tutor.internships.map((internship: SecretaryTutorInternship) =>
+            {tutor.internships.map((internship: SecretaryInternship) =>
                 <List.Item>{internship.name}</List.Item>
             )}
         </List>

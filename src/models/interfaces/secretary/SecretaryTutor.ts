@@ -1,7 +1,7 @@
-import {SecretaryTutorInternship} from './SecretaryTutorInternship';
+import {SecretaryInternship} from './SecretaryInternship';
 
 export interface SecretaryTutor {
     id: string;
     name: string;
-    internships: SecretaryTutorInternship[]
+    internships: SecretaryInternship[]
 }

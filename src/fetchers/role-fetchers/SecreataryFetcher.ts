@@ -65,6 +65,32 @@ export class SecretaryFetcher {
         }
     }
 
+    async createHospital(newHospital: object) {
+        try {
+            const response = await UrlServerConstants.axiosBase
+                .post(UrlServerConstants.secretaryHospitals, newHospital);
+            return {
+                status: response.status,
+                data: response?.data as string
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async deleteHospital(hospitalId: string) {
+        try {
+            const response = await UrlServerConstants.axiosBase
+                .delete(UrlServerConstants.secretaryHospitals + hospitalId);
+            return {
+                status: response.status,
+                data: response?.data as string
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
     async getAllInternships() {
         try {
             const response = await UrlServerConstants.axiosBase.get(UrlServerConstants.secretaryInternships);
