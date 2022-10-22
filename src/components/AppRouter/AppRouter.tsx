@@ -5,7 +5,7 @@ import Student from '../Student/Student';
 import ProtectedRoute from '../../wrappers/ProtectedRoute/ProtectedRoute';
 import NotExistPage from '../NotExistPage/NotExistPage';
 import {Role} from '../../models/enums/Role';
-import {UrlClientConstants as urls} from '../../fetchers/UrlClientConstants';
+import {UrlClientConstants as urls} from '../../fetchers/urls/UrlClientConstants';
 import Tutor from '../Tutor/Tutor';
 import Secretary from '../Secretary/Secretary';
 

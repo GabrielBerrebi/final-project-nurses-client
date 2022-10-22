@@ -6,7 +6,7 @@ import {observer} from 'mobx-react';
 import {loginFetcher} from '../../../fetchers';
 import {Role} from '../../../models/enums/Role';
 import {useState} from 'react';
-import {UrlClientConstants as urls} from '../../../fetchers/UrlClientConstants';
+import {UrlClientConstants as urls} from '../../../fetchers/urls/UrlClientConstants';
 import {getRoleDashboard} from '../../../core/helpers/get-role-dashboard';
 
 const Header = observer(() => {

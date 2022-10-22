@@ -1,6 +1,6 @@
-import {User} from '../models/interfaces/User';
-import {UserFromLogin} from '../models/interfaces/UserFromLogin';
-import UrlServerConstants from './UrlServerConstants';
+import {User} from '../../models/interfaces/User';
+import {UserFromLogin} from '../../models/interfaces/UserFromLogin';
+import UrlServerConstants from '../urls/UrlServerConstants';
 
 export class LoginFetcher {
     async login(user: User) {
