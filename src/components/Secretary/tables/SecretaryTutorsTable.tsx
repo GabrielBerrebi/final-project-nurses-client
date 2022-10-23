@@ -70,7 +70,7 @@ const SecretaryTutorsTable = () => {
                 title="Are you sure to delete this tutor?"
                 onConfirm={() => onDeleteTutor(record)}
                 okText="Yes"
-            > <Button type='primary' danger>Delete</Button>
+            > <Button type='default' danger>Delete</Button>
             </Popconfirm>
 
     }];

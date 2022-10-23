@@ -1,6 +1,7 @@
 import UrlServerConstants from '../urls/UrlServerConstants';
 import {StudentInternship} from '../../models/interfaces/StudentInternship';
 import {SecretaryTutor} from '../../models/interfaces/secretary/SecretaryTutor';
+import {SecretaryStudent} from '../../models/interfaces/secretary/SecretaryStudent';
 
 export class SecretaryFetcher {
     async getAllStudents() {
@@ -8,7 +9,20 @@ export class SecretaryFetcher {
             const response = await UrlServerConstants.axiosBase.get(UrlServerConstants.secretaryStudents);
             return {
                 status: response.status,
-                data: response?.data as StudentInternship[]
+                data: response?.data as SecretaryStudent[]
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async createStudent(newStudent: object) {
+        try {
+            const response = await UrlServerConstants.axiosBase
+                .post(UrlServerConstants.secretaryStudents, newStudent);
+            return {
+                status: response.status,
+                data: response?.data as string
             }
         } catch (e) {
             throw e;

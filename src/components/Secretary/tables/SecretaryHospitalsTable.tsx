@@ -75,7 +75,7 @@ const SecretaryHospitalsTable = () => {
                 title="Are you sure to delete this hospital?"
                 onConfirm={() => onDeleteHospital(record)}
                 okText="Yes"
-            > <Button type='primary' danger>Delete</Button>
+            > <Button type='default' danger>Delete</Button>
             </Popconfirm>
     }];
 

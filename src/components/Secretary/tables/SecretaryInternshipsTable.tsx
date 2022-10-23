@@ -90,7 +90,7 @@ const SecretaryInternshipsTable = () => {
                 title="Are you sure to delete this internship?"
                 onConfirm={() => onDeleteInternship(record)}
                 okText="Yes"
-            > <Button type='primary' danger>Delete</Button>
+            > <Button type='default' danger>Delete</Button>
             </Popconfirm>
     }];
 
@@ -118,11 +118,11 @@ const SecretaryInternshipsTable = () => {
                     <Form.Item label='Tutors' name='tutors' rules={[{required: true}]}>
                         <Select
                             mode="multiple"
-                            style={{width: '100%'}}
                             placeholder="Select the tutors that instruct this internship"
                             optionLabelProp="label"
                         > {tutors?.map((tutor: SecretaryTutor) =>
-                            <Select.Option key={tutor.id} value={tutor.id}>{tutor.name}</Select.Option>
+                            <Select.Option key={tutor.id} value={tutor.id}
+                                           label={tutor.name}>{tutor.name}</Select.Option>
                         )}
                         </Select>
                     </Form.Item>
@@ -130,11 +130,11 @@ const SecretaryInternshipsTable = () => {
                     <Form.Item label='Hospitals' name='hospitals' rules={[{required: true}]}>
                         <Select
                             mode="multiple"
-                            style={{width: '100%'}}
                             placeholder="Select the hospitals that host this internship"
                             optionLabelProp="label"
-                        > {hospitals?.map((tutor: SecretaryTutor) =>
-                            <Select.Option key={tutor.id} value={tutor.id}>{tutor.name}</Select.Option>
+                        > {hospitals?.map((hospital: SecretaryHospital) =>
+                            <Select.Option key={hospital.id} value={hospital.id}
+                                           label={hospital.name}>{hospital.name}</Select.Option>
                         )}
                         </Select>
                     </Form.Item>
@@ -142,11 +142,11 @@ const SecretaryInternshipsTable = () => {
                     <Form.Item label='Required Documents' name='documents' rules={[{required: true}]}>
                         <Select
                             mode="multiple"
-                            style={{width: '100%'}}
                             placeholder="Select the required documents"
                             optionLabelProp="label"
                         > {Object.values(RequiredDocumentType).map((doc: string) =>
-                            <Select.Option key={doc} value={doc}>{formatToPascalCase(doc)}</Select.Option>
+                            <Select.Option key={doc} value={doc}
+                                           label={formatToPascalCase(doc)}>{formatToPascalCase(doc)}</Select.Option>
                         )}
                         </Select>
                     </Form.Item>
