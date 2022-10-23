@@ -1,7 +1,7 @@
-import UrlServerConstants from './UrlServerConstants';
-import {StudentInternship} from '../models/interfaces/StudentInternship';
+import UrlServerConstants from '../urls/UrlServerConstants';
+import {StudentInternship} from '../../models/interfaces/StudentInternship';
 
-export class StudentInternshipFetcher {
+export class StudentFetcher {
     async getStudentInternship(studentId: string) {
         try {
             const response = await UrlServerConstants.axiosBase.get(UrlServerConstants.studentInternships + studentId);

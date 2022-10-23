@@ -77,8 +77,12 @@ const RegisterTable = () => {
         );
     }
 
+    const getRowKey = (_: any, index: any) => {
+        return index;
+    }
+
     return (
-        <Table columns={columns} dataSource={data} expandRowByClick={true}
+        <Table columns={columns} dataSource={data} expandRowByClick sticky rowKey={getRowKey}
                expandable={{
                    expandedRowRender: record => getRenderedExpansion(record),
                    rowExpandable: record => !!record.description?.length ||

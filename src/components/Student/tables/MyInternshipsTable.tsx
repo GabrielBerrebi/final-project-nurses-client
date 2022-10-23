@@ -26,7 +26,7 @@ const MyInternshipsTable = () => {
         title: 'ID',
         dataIndex: 'id',
         key: 'id',
-        render: (id: string) => <strong>#{id}</strong>
+        render: (id: string) => <strong>{id}</strong>
     }, {
         title: 'Name',
         dataIndex: 'name',
@@ -68,9 +68,13 @@ const MyInternshipsTable = () => {
         );
     }
 
+    const getRowKey = (_: any, index: any) => {
+        return index;
+    }
+
     return (
-        <Table columns={columns} dataSource={data}
-               expandRowByClick={true} expandable={{
+        <Table columns={columns} dataSource={data} sticky rowKey={getRowKey}
+               expandRowByClick expandable={{
             expandedRowRender: record => getRenderedExpansion(record),
             rowExpandable: record => !!record.description?.length,
         }}/>
