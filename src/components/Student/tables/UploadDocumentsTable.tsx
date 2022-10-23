@@ -11,7 +11,7 @@ const UploadDocumentsTable = () => {
         title: 'ID',
         dataIndex: 'id',
         key: 'id',
-        render: (id: string) => <strong>#{id}</strong>
+        render: (id: string) => <strong>{id}</strong>
     }, {
         title: 'Name',
         dataIndex: 'name',
@@ -59,8 +59,12 @@ const UploadDocumentsTable = () => {
         );
     }
 
+    const getRowKey = (_: any, index: any) => {
+        return index;
+    }
+
     return (
-        <Table columns={columns} dataSource={data} expandRowByClick={true}
+        <Table columns={columns} dataSource={data} expandRowByClick sticky rowKey={getRowKey}
                expandable={{
                    expandedRowRender: record => getRenderedExpansion(record),
                    rowExpandable: _ => true,

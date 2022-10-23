@@ -47,6 +47,7 @@ const SecretaryHospitalsTable = () => {
         title: 'ID',
         dataIndex: 'id',
         key: 'id',
+        render: (id: string) => <strong>{id}</strong>
     }, {
         title: 'Name',
         dataIndex: 'name',
@@ -79,10 +80,14 @@ const SecretaryHospitalsTable = () => {
             </Popconfirm>
     }];
 
+    const getRowKey = (_: any, index: any) => {
+        return index;
+    }
+
     return (
         <div className={styles.table}>
             <Button type='primary' className={styles.addButton} onClick={showModal}>Add</Button>
-            <Modal title='Add a new Hospital' open={open} onCancel={hideModal}
+            <Modal title='Add a new hospital' open={open} onCancel={hideModal}
                    onOk={form.submit} okText='Create'>
                 <Form form={form} onFinish={onCreateHospital}
                       labelCol={{span: 8}} wrapperCol={{span: 16}}>
@@ -97,7 +102,7 @@ const SecretaryHospitalsTable = () => {
                     </Form.Item>
                 </Form>
             </Modal>
-            <Table sticky key='s-t-table' columns={columns} dataSource={data}/>
+            <Table key='s-h-table' columns={columns} dataSource={data} rowKey={getRowKey} sticky/>
         </div>
     );
 }

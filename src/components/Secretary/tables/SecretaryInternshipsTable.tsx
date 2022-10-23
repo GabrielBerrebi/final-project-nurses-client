@@ -66,6 +66,7 @@ const SecretaryInternshipsTable = () => {
         title: 'ID',
         dataIndex: 'id',
         key: 'id',
+        render: (id: string) => <strong>{id}</strong>
     }, {
         title: 'Name',
         dataIndex: 'name',
@@ -103,10 +104,14 @@ const SecretaryInternshipsTable = () => {
         );
     }
 
+    const getRowKey = (_: any, index: any) => {
+        return index;
+    }
+
     return (
         <div className={styles.table}>
             <Button type='primary' className={styles.addButton} onClick={showModal}>Add</Button>
-            <Modal title='Add a new Internship' open={open} onCancel={hideModal}
+            <Modal title='Add a new internship' open={open} onCancel={hideModal}
                    onOk={form.submit} okText='Create'>
                 <Form form={form} onFinish={onCreateInternship}
                       labelCol={{span: 8}} wrapperCol={{span: 16}}>
@@ -157,11 +162,11 @@ const SecretaryInternshipsTable = () => {
                     </Form.Item>
                 </Form>
             </Modal>
-            <Table key='s-t-table' columns={columns} dataSource={data} sticky
+            <Table key='s-i-table' columns={columns} dataSource={data} rowKey={getRowKey} sticky
                    expandable={{
                        expandedRowRender: record => getRenderedExpansion(record),
                        rowExpandable: record => !!record.description?.length,
-                   }}
+                   }} expandRowByClick
             />
         </div>
     );

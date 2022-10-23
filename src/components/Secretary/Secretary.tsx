@@ -6,16 +6,17 @@ import SecretaryTutorsTable from './tables/SecretaryTutorsTable';
 import SecretaryStudentsTable from './tables/SecretaryStudentsTable';
 import SecretaryHospitalsTable from './tables/SecretaryHospitalsTable';
 import SecretaryInternshipsTable from './tables/SecretaryInternshipsTable';
+import SecretaryRequests from './tables/SecretaryRequests';
 
 const SecretaryTableTabs = () => {
     return (
         <Tabs items={[
-            {key: 'Requests', label: 'Requests', children: 'Requests'},
-            {key: 'space', label: '', children: <Space direction='horizontal' />},
-            {key: 'Students', label: 'Students', children: <SecretaryStudentsTable />},
-            {key: 'Tutors', label: 'Tutors', children: <SecretaryTutorsTable />},
-            {key: 'Hospitals', label: 'Hospitals', children: <SecretaryHospitalsTable />},
-            {key: 'Internships', label: 'Internships', children: <SecretaryInternshipsTable />},
+            {key: 'Requests', label: 'Requests', children: <SecretaryRequests/>},
+            {key: 'space', label: '', children: <Space direction='horizontal'/>},
+            {key: 'Students', label: 'Students', children: <SecretaryStudentsTable/>},
+            {key: 'Tutors', label: 'Tutors', children: <SecretaryTutorsTable/>},
+            {key: 'Hospitals', label: 'Hospitals', children: <SecretaryHospitalsTable/>},
+            {key: 'Internships', label: 'Internships', children: <SecretaryInternshipsTable/>},
         ]}/>
     );
 }

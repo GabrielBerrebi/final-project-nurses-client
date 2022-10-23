@@ -47,6 +47,7 @@ const SecretaryTutorsTable = () => {
         title: 'ID',
         dataIndex: 'id',
         key: 'id',
+        render: (id: string) => <strong>{id}</strong>
     }, {
         title: 'Name',
         dataIndex: 'name',
@@ -75,10 +76,14 @@ const SecretaryTutorsTable = () => {
 
     }];
 
+    const getRowKey = (_: any, index: any) => {
+        return index;
+    }
+
     return (
         <div className={styles.table}>
             <Button type='primary' className={styles.addButton} onClick={showModal}>Add</Button>
-            <Modal title='Add a new Tutor' open={open} onCancel={hideModal} onOk={form.submit} okText='Create'>
+            <Modal title='Add a new tutor' open={open} onCancel={hideModal} onOk={form.submit} okText='Create'>
                 <Form form={form} onFinish={onCreateTutor}
                       labelCol={{span: 8}} wrapperCol={{span: 16}}>
                     <Form.Item label='Name' name='name'
@@ -97,7 +102,7 @@ const SecretaryTutorsTable = () => {
                     </Form.Item>
                 </Form>
             </Modal>
-            <Table key='s-t-table' columns={columns} dataSource={data}/>
+            <Table key='s-t-table' columns={columns} dataSource={data} rowKey={getRowKey} sticky/>
         </div>
     );
 }

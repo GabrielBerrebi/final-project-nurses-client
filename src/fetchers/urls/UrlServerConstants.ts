@@ -13,6 +13,7 @@ class UrlServerConstants {
     static readonly secretaryTutors = 'secretary/tutors/';
     static readonly secretaryHospitals = 'hospitals/';
     static readonly secretaryInternships = 'secretary/internships/';
+    static readonly secretaryRequests = 'secretary/requests/';
 
     static axiosBase = axios.create({
         baseURL: this._baseURL,

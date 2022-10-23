@@ -4,6 +4,18 @@ import {SecretaryTutor} from '../../models/interfaces/secretary/SecretaryTutor';
 import {SecretaryStudent} from '../../models/interfaces/secretary/SecretaryStudent';
 
 export class SecretaryFetcher {
+    async getAllRequests() {
+        try {
+            const response = await UrlServerConstants.axiosBase.get(UrlServerConstants.secretaryRequests);
+            return {
+                status: response.status,
+                data: response?.data as SecretaryStudent[]
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
     async getAllStudents() {
         try {
             const response = await UrlServerConstants.axiosBase.get(UrlServerConstants.secretaryStudents);
