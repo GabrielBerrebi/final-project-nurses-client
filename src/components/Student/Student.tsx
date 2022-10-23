@@ -11,6 +11,7 @@ const TableTabs = () => {
         <Tabs size='large' items={[
             {key: 'Internships', label: 'Internships', children: <InternshipTableTabs/>},
             {key: 'Documents', label: 'Documents', children: <UploadDocumentsTable/>},
+            {key: 'Preferences', label: 'Preferences', children: <UploadDocumentsTable/>},
             {key: 'Attendances', label: 'Attendances', children: '', disabled: true},
         ]}/>
     );
