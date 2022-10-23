@@ -102,4 +102,30 @@ export class SecretaryFetcher {
             throw e;
         }
     }
+
+    async createInternship(newInternship: object) {
+        try {
+            const response = await UrlServerConstants.axiosBase
+                .post(UrlServerConstants.secretaryInternships, newInternship);
+            return {
+                status: response.status,
+                data: response?.data as string
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async deleteInternship(internshipId: string) {
+        try {
+            const response = await UrlServerConstants.axiosBase
+                .delete(UrlServerConstants.secretaryInternships + internshipId);
+            return {
+                status: response.status,
+                data: response?.data as string
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
 }

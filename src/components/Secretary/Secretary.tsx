@@ -5,6 +5,7 @@ import {Space, Tabs} from 'antd';
 import SecretaryTutorsTable from './tables/SecretaryTutorsTable';
 import SecretaryStudentsTable from './tables/SecretaryStudentsTable';
 import SecretaryHospitalsTable from './tables/SecretaryHospitalsTable';
+import SecretaryInternshipsTable from './tables/SecretaryInternshipsTable';
 
 const SecretaryTableTabs = () => {
     return (
@@ -14,7 +15,7 @@ const SecretaryTableTabs = () => {
             {key: 'Students', label: 'Students', children: <SecretaryStudentsTable />},
             {key: 'Tutors', label: 'Tutors', children: <SecretaryTutorsTable />},
             {key: 'Hospitals', label: 'Hospitals', children: <SecretaryHospitalsTable />},
-            {key: 'Internships', label: 'Internships', children: <SecretaryHospitalsTable />},
+            {key: 'Internships', label: 'Internships', children: <SecretaryInternshipsTable />},
         ]}/>
     );
 }

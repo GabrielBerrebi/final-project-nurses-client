@@ -20,7 +20,7 @@ const SecretaryHospitalsTable = () => {
     }
 
     const onDeleteHospital = async (record: SecretaryHospital) => {
-        await secretaryFetcher.deleteTutor(record.id);
+        await secretaryFetcher.deleteHospital(record.id);
         getAllHospitals();
     }
 
@@ -72,7 +72,7 @@ const SecretaryHospitalsTable = () => {
         key: 'delete',
         render: (_, record: SecretaryHospital) =>
             <Popconfirm
-                title="Are you sure to delete this tutor?"
+                title="Are you sure to delete this hospital?"
                 onConfirm={() => onDeleteHospital(record)}
                 okText="Yes"
             > <Button type='primary' danger>Delete</Button>
@@ -97,7 +97,7 @@ const SecretaryHospitalsTable = () => {
                     </Form.Item>
                 </Form>
             </Modal>
-            <Table key='s-t-table' columns={columns} dataSource={data}/>
+            <Table sticky key='s-t-table' columns={columns} dataSource={data}/>
         </div>
     );
 }

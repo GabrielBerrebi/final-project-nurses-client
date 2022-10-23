@@ -8,7 +8,7 @@ const Layout = ({children}: React.PropsWithChildren<{}>) => {
         <div className={styles.layout}>
             <Header/>
             <div className={styles.children}>{children}</div>
-            <Footer/>
+            {/*<Footer/>*/}
         </div>
     );
 }
