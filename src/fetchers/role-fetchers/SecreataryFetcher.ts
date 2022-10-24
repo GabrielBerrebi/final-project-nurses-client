@@ -180,4 +180,17 @@ export class SecretaryFetcher {
             throw e;
         }
     }
+
+    async runAlgoRequestInternship(requests: object) {
+        try {
+            const response = await UrlServerConstants.axiosBase
+                .put(UrlServerConstants.algo, requests);
+            return {
+                status: response.status,
+                data: response?.data as object
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
 }

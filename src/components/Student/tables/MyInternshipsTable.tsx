@@ -29,7 +29,7 @@ const MyInternshipsTable = () => {
         render: (id: string) => <strong>{id}</strong>
     }, {
         title: 'Name',
-        dataIndex: 'name',
+        dataIndex: ['name', 'name'],
         key: 'name',
     }, {
         title: 'Tutor',
@@ -38,7 +38,7 @@ const MyInternshipsTable = () => {
         render: (internship: StudentInternship) => <a href={'tel:' + internship.tutorPhone}>{internship.tutorName}</a>
     }, {
         title: 'Hospital',
-        dataIndex: 'hospitalName',
+        dataIndex: ['hospitalName', 'name'],
         key: 'hospitalName',
     }, {
         title: 'Status',

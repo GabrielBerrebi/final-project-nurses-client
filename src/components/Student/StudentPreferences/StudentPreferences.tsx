@@ -19,6 +19,7 @@ const StudentPreferences = () => {
     const getPreferences = async () => {
         if (id === '') return;
         const preferences = await studentInternshipFetcher.getStudentPreferences(id);
+        console.log(preferences.data)
         setDefaultPreferences(preferences.data as unknown as StudentPreferencesForm);
         initForm();
     }

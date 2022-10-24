@@ -9,6 +9,7 @@ class UrlServerConstants {
     static readonly studentPostInternshipsRequest = 'student/internship/';
     static readonly studentInternshipsRequests = 'internship/';
     static readonly preferences = 'preference/';
+    static readonly algo = 'algo/';
 
     static readonly tutorInternships = 'tutor/internships/';
 

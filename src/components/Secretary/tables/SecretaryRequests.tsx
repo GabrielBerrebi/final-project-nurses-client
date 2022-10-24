@@ -17,7 +17,8 @@ const SecretaryRequests = () => {
     const [tutors, setTutors] = useState<SecretaryTutor[] | undefined>(undefined);
     const [hospitals, setHospitals] = useState<SecretaryHospital[] | undefined>(undefined);
     const [selectedRequest, setSelectedRequest] = useState<SecretaryRequest>();
-    const [requestsIds, setRequestsIds] = useState<string[]>([]);
+    const [selectedRequests, setSelectedRequests] = useState<SecretaryRequest[]>([]);
+    const [isValidateRequestLoading, setIsValidateRequestLoading] = useState<boolean>(false);
     const [form] = Form.useForm();
     const id: string = userStore.getId();
 
@@ -98,12 +99,19 @@ const SecretaryRequests = () => {
     }
 
     const onRowSelected = (selectedRowKeys: React.Key[], selectedRows: SecretaryRequest[]) => {
-        const requestsIds: string[] = selectedRows.map((row: SecretaryRequest) => row.internship.id);
-        setRequestsIds(requestsIds);
+        setSelectedRequests(selectedRows);
     }
 
-    const onValidateRequests = () => {
-        console.log(requestsIds);
+    const onValidateRequests = async () => {
+        setIsValidateRequestLoading(true);
+        const requestsToSend: object[] = [];
+        selectedRequests.forEach((request: SecretaryRequest) => {
+            requestsToSend.push({'id_student': request.student.id, 'id_internship': request.internship.id});
+        })
+
+        await secretaryFetcher.runAlgoRequestInternship({'studentInternship': requestsToSend});
+        setIsValidateRequestLoading(false);
+        getAllRequests();
     }
 
     const onFinishManualInvestment = async () => {
@@ -115,8 +123,8 @@ const SecretaryRequests = () => {
 
     return (
         <div className={styles.table}>
-            <Button type='primary' style={{alignSelf: 'end'}}
-                    disabled={!requestsIds.length} onClick={onValidateRequests}>Validate Requests</Button>
+            <Button type='primary' style={{alignSelf: 'end'}} loading={isValidateRequestLoading}
+                    disabled={!selectedRequests.length} onClick={onValidateRequests}>Validate Requests</Button>
             <Modal open={open} title='Manual Investment' onCancel={hideModal} onOk={form.submit}>
                 <Form form={form} onFinish={onFinishManualInvestment}
                       labelCol={{span: 8}} wrapperCol={{span: 16}}>

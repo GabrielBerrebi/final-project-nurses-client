@@ -33,7 +33,7 @@ export class StudentFetcher {
             const response = await UrlServerConstants.axiosBase.get(UrlServerConstants.preferences + id);
             return {
                 status: response.status,
-                data: response?.data as StudentPreferencesForm[]
+                data: response?.data as StudentPreferencesForm
             }
         } catch (e) {
             throw e;
