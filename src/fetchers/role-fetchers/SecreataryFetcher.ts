@@ -154,4 +154,17 @@ export class SecretaryFetcher {
             throw e;
         }
     }
+
+    async putInternship(investment: object) {
+        try {
+            const response = await UrlServerConstants.axiosBase
+                .put(UrlServerConstants.secretaryInvestment, investment);
+            return {
+                status: response.status,
+                data: response?.data as object
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
 }
