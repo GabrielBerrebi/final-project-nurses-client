@@ -2,17 +2,28 @@ import {useEffect, useState} from 'react';
 import {userStore} from '../../../stores';
 import {secretaryFetcher} from '../../../fetchers';
 import {ColumnsType} from 'antd/es/table';
-import {Button, Form, Input, List, Modal, Popconfirm, Space, Table} from 'antd';
+import {Button, Form, Input, List, Modal, Popconfirm, Select, Space, Table} from 'antd';
 import {SecretaryInternship} from '../../../models/interfaces/secretary/SecretaryInternship';
 import styles from './tables.module.less';
 import {SecretaryHospital} from '../../../models/interfaces/secretary/SecretaryHospital';
+import {SecretaryFullInternship} from '../../../models/interfaces/secretary/SecretaryFullInternship';
 
 const SecretaryHospitalsTable = () => {
     const [data, setData] = useState<SecretaryHospital[] | undefined>(undefined);
     const [open, setOpen] = useState(false);
     const [openHospital, setOpenHospital] = useState(false);
     const [form] = Form.useForm();
+    const [form1] = Form.useForm();
+
     const id: string = userStore.getId();
+
+    const [internships, setInternships] = useState<SecretaryFullInternship[] | undefined>(undefined);
+
+    const getAllInternships = async () => {
+        if (id === '') return;
+        const internships = await secretaryFetcher.getAllInternships();
+        setInternships(internships.data as unknown as SecretaryFullInternship[]);
+    }
 
     const getAllHospitals = async () => {
         if (id === '') return;
@@ -34,6 +45,7 @@ const SecretaryHospitalsTable = () => {
 
     useEffect(() => {
         getAllHospitals();
+        getAllInternships();
     }, []);
 
     const showModal = () => {
@@ -93,6 +105,13 @@ const SecretaryHospitalsTable = () => {
         return index;
     }
 
+    const onUpdateManageHospital = async () => {
+        const manage = form1.getFieldsValue();
+        await secretaryFetcher.postManageHospital(manage);
+        hideHospitalModal();
+        form1.resetFields();
+    }
+
     return (
         <div className={styles.table}>
             <div className={styles.buttons}>
@@ -111,6 +130,60 @@ const SecretaryHospitalsTable = () => {
                     <Form.Item label='Location' name='location'
                                rules={[{required: true}]}>
                         <Input/>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
+            <Modal title='Manage internship in hospital' open={openHospital} onCancel={hideHospitalModal}
+                   onOk={form1.submit} okText='Create'>
+                <Form form={form1} onFinish={onUpdateManageHospital}
+                      labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                    <Form.Item label='Internship' name='id_internship' rules={[{required: true}]}>
+                        <Select
+                            placeholder="Internship"
+                            optionLabelProp="label"
+                        > {internships?.map((internship: SecretaryFullInternship) =>
+                            <Select.Option key={internship.id} value={internship.id}
+                                           label={internship.name}>{internship.name}</Select.Option>
+                        )}
+                        </Select>
+                    </Form.Item>
+                    <Space/>
+                    <Form.Item label='Hospital' name='id_hospital' rules={[{required: true}]}>
+                        <Select
+                            placeholder="Hospital"
+                            optionLabelProp="label"
+                        > {data?.map((hospital: SecretaryHospital) =>
+                            <Select.Option key={hospital.id} value={hospital.id}
+                                           label={hospital.name}>{hospital.name}</Select.Option>
+                        )}
+                        </Select>
+                    </Form.Item>
+                    <Space/>
+                    <h3>Number of seats</h3>
+                    <Space/>
+
+                    <Form.Item label='09:00 - 12:00' name='numPlace9_12'
+                               rules={[{required: true}]}>
+                        <Input/>
+                    </Form.Item>
+                    <Space/>
+                    <Form.Item label='12:00 - 15:00' name='numPlace12_15'
+                               rules={[{required: true}]}>
+                        <Input/>
+                    </Form.Item>
+                    <Space/>
+                    <Form.Item label='15:00 - 18:00' name='numPlace15_18'
+                               rules={[{required: true}]}>
+                        <Input/>
+                    </Form.Item>
+
+                    <Space/>
+                    <Form.Item label='Days?' name='days' shouldUpdate>
+                        <Select style={{width: 250}}>
+                            <Select.Option key='DLV' value='DLV'>Sunday - Monday - Friday</Select.Option>
+                            <Select.Option key='MMJ' value='MMJ'>Tuesday - Wednesday - Thursday</Select.Option>
+                        </Select>
                     </Form.Item>
                 </Form>
             </Modal>

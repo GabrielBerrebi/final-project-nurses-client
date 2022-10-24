@@ -14,9 +14,9 @@ const StudentPreferences = () => {
     const childrenNumber: number[] = [0, 1, 2, 3, 4, 5];
     const days: string[] = ['DLV', 'MMJ'];
     const hours: string[] = ['9-12', '12-15', '15-18'];
+    const id: string = userStore.getId();
 
     const getPreferences = async () => {
-        const id: string = userStore.getId();
         if (id === '') return;
         const preferences = await studentInternshipFetcher.getStudentPreferences(id);
         setDefaultPreferences(preferences.data as unknown as StudentPreferencesForm);
@@ -34,15 +34,15 @@ const StudentPreferences = () => {
                 id_student: userStore.getId(),
                 married: false,
                 children: childrenNumber[0],
-                car: false,
+                car: true,
                 work: false,
                 disability: false,
                 desiredCity: cities[0],
                 desiredDays: days[0],
                 desiredHours: hours[0]
-            })
+            });
+        console.log(defaultPreferences);
     }
-
 
     const onModifyPreferences = async () => {
         setFormsDisabled(!formsDisabled);
@@ -52,18 +52,16 @@ const StudentPreferences = () => {
     }
 
     const FamilyCard = () => {
-        const [showChildren, setShowChildren] = useState<boolean>(false);
-
         return (
             <Card title='Family' style={{flex: 1}}>
                 <Form name='family' form={form} labelCol={{span: 12}} wrapperCol={{span: 12}} labelWrap
                       onFinish={(e) => console.log(e)} disabled={formsDisabled}>
                     <Form.Item label='Are you married?' name='married' valuePropName='checked' shouldUpdate
                                rules={[{required: true}]}>
-                        <Switch defaultChecked={false} onChange={(value: boolean) => setShowChildren(!value)}/>
+                        <Switch defaultChecked={false}/>
                     </Form.Item>
                     <Space/>
-                    <Form.Item label='How many children have you?' name='children' hidden={!showChildren} shouldUpdate>
+                    <Form.Item label='How many children have you?' name='children' shouldUpdate>
                         <Select>
                             {childrenNumber.map((numChild: number) =>
                                 <Select.Option key={numChild} value={numChild}>{numChild}</Select.Option>)}
@@ -77,7 +75,6 @@ const StudentPreferences = () => {
     const WorkCard = () => {
         return (
             <Card title='Work' style={{flex: 2}}>
-                {/*<Button onClick={() => console.log(form.getFieldsValue())}>GET</Button>*/}
                 <Form name='family' form={form} labelCol={{span: 15}} labelWrap
                       style={{display: 'flex', justifyContent: 'space-around'}}
                       onFinish={(e) => console.log(e)} disabled={formsDisabled}>

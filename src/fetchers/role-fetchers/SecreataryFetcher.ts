@@ -167,4 +167,17 @@ export class SecretaryFetcher {
             throw e;
         }
     }
+
+    async postManageHospital(manage: object) {
+        try {
+            const response = await UrlServerConstants.axiosBase
+                .post(UrlServerConstants.secretaryManageHospital, manage);
+            return {
+                status: response.status,
+                data: response?.data as object
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
 }
