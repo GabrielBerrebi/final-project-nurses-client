@@ -77,7 +77,7 @@ const StudentPreferences = () => {
     const WorkCard = () => {
         return (
             <Card title='Work' style={{flex: 2}}>
-                <Button onClick={() => console.log(form.getFieldsValue())}>GET</Button>
+                {/*<Button onClick={() => console.log(form.getFieldsValue())}>GET</Button>*/}
                 <Form name='family' form={form} labelCol={{span: 15}} labelWrap
                       style={{display: 'flex', justifyContent: 'space-around'}}
                       onFinish={(e) => console.log(e)} disabled={formsDisabled}>

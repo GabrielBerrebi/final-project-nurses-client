@@ -10,6 +10,7 @@ import {SecretaryHospital} from '../../../models/interfaces/secretary/SecretaryH
 const SecretaryHospitalsTable = () => {
     const [data, setData] = useState<SecretaryHospital[] | undefined>(undefined);
     const [open, setOpen] = useState(false);
+    const [openHospital, setOpenHospital] = useState(false);
     const [form] = Form.useForm();
     const id: string = userStore.getId();
 
@@ -41,6 +42,14 @@ const SecretaryHospitalsTable = () => {
 
     const hideModal = () => {
         setOpen(false);
+    };
+
+    const showHospitalModal = () => {
+        setOpenHospital(true);
+    };
+
+    const hideHospitalModal = () => {
+        setOpenHospital(false);
     };
 
     const columns: ColumnsType<SecretaryHospital> = [{
@@ -86,7 +95,10 @@ const SecretaryHospitalsTable = () => {
 
     return (
         <div className={styles.table}>
-            <Button type='primary' className={styles.addButton} onClick={showModal}>Add</Button>
+            <div className={styles.buttons}>
+                <Button type='default'  onClick={showHospitalModal}>Manage Hospital</Button>
+                <Button type='primary' className={styles.addButton} onClick={showModal}>Add</Button>
+            </div>
             <Modal title='Add a new hospital' open={open} onCancel={hideModal}
                    onOk={form.submit} okText='Create'>
                 <Form form={form} onFinish={onCreateHospital}
@@ -102,6 +114,7 @@ const SecretaryHospitalsTable = () => {
                     </Form.Item>
                 </Form>
             </Modal>
+
             <Table key='s-h-table' columns={columns} dataSource={data} rowKey={getRowKey} sticky/>
         </div>
     );

@@ -90,7 +90,7 @@ const SecretaryRequests = () => {
             form.setFieldValue('id_internship', request.internship.id);
             form.setFieldValue('id_student', request.student.id);
             showModal();
-        }}>Add</Button>
+        }}>Invest</Button>
     }];
 
     const getRowKey = (_: any, index: any) => {
