@@ -1,4 +1,4 @@
-import {Button, Card, Form, Select, Space, Switch} from 'antd';
+import {Button, Card, Form, Input, Select, Space, Switch} from 'antd';
 import {formatToPascalCase} from '../../../core/helpers/format-to-pascal-case';
 import {useEffect, useState} from 'react';
 import {StudentPreferencesForm} from '../../../models/interfaces/StudentPreferences';
@@ -7,7 +7,7 @@ import {studentInternshipFetcher} from '../../../fetchers';
 
 const StudentPreferences = () => {
     const [form] = Form.useForm<StudentPreferencesForm>();
-    const [formsDisabled, setFormsDisabled] = useState<boolean>(false);
+    const [formsDisabled, setFormsDisabled] = useState<boolean>(true);
     const [defaultPreferences, setDefaultPreferences] = useState<StudentPreferencesForm>();
 
     const cities: string[] = ['TEL AVIV', 'PETAH TIKVA', 'JERUSALEM', 'BEER SHEVA'];
@@ -47,7 +47,7 @@ const StudentPreferences = () => {
     const onModifyPreferences = async () => {
         setFormsDisabled(!formsDisabled);
 
-        if (formsDisabled)
+        if (!formsDisabled)
             await studentInternshipFetcher.putStudentPreferences(form.getFieldsValue());
     }
 
@@ -56,6 +56,9 @@ const StudentPreferences = () => {
             <Card title='Family' style={{flex: 1}}>
                 <Form name='family' form={form} labelCol={{span: 12}} wrapperCol={{span: 12}} labelWrap
                       onFinish={(e) => console.log(e)} disabled={formsDisabled}>
+                    <Form.Item name='id_student' hidden>
+                        <Input defaultValue={id} />
+                    </Form.Item>
                     <Form.Item label='Are you married?' name='married' valuePropName='checked' shouldUpdate
                                rules={[{required: true}]}>
                         <Switch defaultChecked={false}/>

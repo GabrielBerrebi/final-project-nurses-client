@@ -44,11 +44,12 @@ const RegisterTable = () => {
         title: 'Action',
         dataIndex: '',
         key: 'action',
-        render: (request: RegisterInternship) => <Button onClick={(e) => onRegisterClick(e, request)} type='primary'>Register</Button>
+        render: (request: RegisterInternship) => <Button onClick={(e) => onRegisterClick(e, request)}
+                                                         type='primary'>Register</Button>
     },];
 
     const onRegisterClick = async (e: React.MouseEvent<HTMLElement>, request: RegisterInternship) => {
-        e.preventDefault();
+        e.stopPropagation();
         const requestToSend = {
             'id_student': id,
             'id_internship': request.id

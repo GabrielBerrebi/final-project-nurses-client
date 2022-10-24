@@ -5,6 +5,7 @@ export interface StudentInternship {
     id: string;
     name: string;
     tutorName: string;
+    tutorPhone: string;
     status: Status;
     description?: string;
     documents?: RequiredDocument[];
