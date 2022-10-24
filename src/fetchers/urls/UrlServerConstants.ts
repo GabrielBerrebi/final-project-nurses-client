@@ -6,6 +6,8 @@ class UrlServerConstants {
     static readonly loginURL: string = 'auth/login/';
     static readonly logoutURL: string = 'auth/logout/';
     static readonly studentInternships = 'student/internships/';
+    static readonly studentPostInternshipsRequest = 'student/internship/';
+    static readonly studentInternshipsRequests = 'internship/';
     static readonly preferences = 'preference/';
 
     static readonly tutorInternships = 'tutor/internships/';
